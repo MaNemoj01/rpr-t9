@@ -20,7 +20,7 @@ public class GeografijaDAO {
     public GeografijaDAO() {
         try {
             //Class.forName("com.mysql.jdbc.Driver");
-            Class.forName("org.sqlite.JDBC");
+            //Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:baza.db");
             stmt1 = conn.prepareStatement("SELECT id,naziv,broj_stanovnika FROM grad WHERE drzava=?");
             ResultSet rs = stmt1.executeQuery();
@@ -131,7 +131,8 @@ public class GeografijaDAO {
 
         // url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
         String url = "jdbc:sqlite:baza.db";
-        try (Connection conn = DriverManager.getConnection(url)) {
+        try {
+            Connection conn = DriverManager.getConnection(url);
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
@@ -139,17 +140,19 @@ public class GeografijaDAO {
             }
 
         } catch (SQLException e) {
+
             System.out.println(e.getMessage());
         }
     }
     public static void createNewTable() {
         // SQLite connection string
-        // String url = "jdbc:sqlite:C://sqlite/db/baza.db";
+        //String url = "jdbc:sqlite:C://sqlite/db/baza.db";
 
         // SQL statement for creating a new table
         String grad = "CREATE TABLE IF NOT EXISTS grad (\n"
                 + "	id int PRIMARY KEY,\n"
                 + "	naziv text NOT NULL,\n"
+                + "	broj_stanovnika int,\n"
                 + "	drzava int \n"
                 + ");";
         String drzava= "CREATE TABLE IF NOT EXISTS drzava (\n"
