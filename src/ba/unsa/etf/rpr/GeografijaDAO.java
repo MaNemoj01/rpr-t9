@@ -158,7 +158,8 @@ public class GeografijaDAO {
         String drzava= "CREATE TABLE IF NOT EXISTS drzava (\n"
                 + "	id int PRIMARY KEY,\n"
                 + "	naziv text NOT NULL,\n"
-                + "	CONSTRAINT drzava_grad_id_fk FOREIGN KEY (glavni_grad) REFERENCES grad (id)\n"
+                //+ "	CONSTRAINT drzava_grad_id_fk FOREIGN KEY (glavni_grad) REFERENCES grad (id)\n"
+                + " glavni_grad text NOT NULL\n"
                 + ");";
         String url = "jdbc:sqlite:baza.db";
         try (Connection conn = DriverManager.getConnection(url);
